@@ -29,8 +29,6 @@ echo "</br></br>";
 // 4. Calculate signature
 $sign = generateSign($stringToBeSigned, $appRsaPrivateKeyPem);
 $parameters["sign"] = $sign;
-echo "Sign : " . $sign;
-echo "</br></br>";
 
 // 5. Send HTTP request
 $jsonString = json_encode($parameters);
