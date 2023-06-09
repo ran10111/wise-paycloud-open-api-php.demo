@@ -55,46 +55,26 @@ echo "</br></br>";
  * @return string
  */
  function buildToBeSignString($params)
-    {
-        ksort($params);
-        unset($params['sign']);
-
-        $stringToBeSigned = "";
-        $i = 0;
-        foreach ($params as $k => $v) {
-            if ("@" != substr($v, 0, 1)) {
-
-                // Convert to target character set
-                $v = characet($v, "UTF-8");
-
-                if ($i == 0) {
-                    $stringToBeSigned .= "$k" . "=" . "$v";
-                } else {
-                    $stringToBeSigned .= "&" . "$k" . "=" . "$v";
-                }
-                $i++;
-            }
-        }
-
-        unset ($k, $v);
-        return $stringToBeSigned;
-    }
-
-/**
- * Convert Character Set Encoding
- * @param $data
- * @param $targetCharset
- * @return string
- */
-function characet($data, $targetCharset)
 {
-    if (!empty($data)) {
-        $fileType = "UTF-8";
-        if (strcasecmp($fileType, $targetCharset) != 0) {
-            $data = mb_convert_encoding($data, $targetCharset, $fileType);
+    ksort($params);
+    unset($params['sign']);
+
+    $stringToBeSigned = "";
+    $i = 0;
+    foreach ($params as $k => $v) {
+        if ("@" != substr($v, 0, 1)) {
+
+            if ($i == 0) {
+                $stringToBeSigned .= "$k" . "=" . "$v";
+            } else {
+                $stringToBeSigned .= "&" . "$k" . "=" . "$v";
+            }
+            $i++;
         }
     }
-    return $data;
+
+    unset ($k, $v);
+    return $stringToBeSigned;
 }
 
 function generateSign($data, $priKey)
