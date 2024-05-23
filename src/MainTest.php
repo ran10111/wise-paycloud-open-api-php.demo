@@ -21,6 +21,10 @@ $parameters["method"] = "order.query";
 $parameters["merchant_no"] = "312100000164";
 $parameters["merchant_order_no"] = "TEST_1685946062143";
 
+$parameters = array_map(function ($v){
+    return is_array($v) ? json_encode($v): $v;
+}, $parameters);
+
 // 3. Build a string to be signed
 $stringToBeSigned = buildToBeSignString($parameters);
 echo "StringToBeSigned : " . $stringToBeSigned;
